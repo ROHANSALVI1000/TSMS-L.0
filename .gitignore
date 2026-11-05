@@ -1,18 +1,21 @@
-
-
-# Python
+# Python cache
 __pycache__/
 *.pyc
 
-# Environment
+# Environment variables
 .env
 .env.*
 
-# React / Vite
-node_modules/
-dist/
-.cache/
-.vite/
+# React dependencies
+frontend--template/node_modules/
 
-# Logs
-npm-debug.log*
+# Build files
+frontend--template/dist/
+
+# Vite cache
+frontend--template/.vite/
+
+# Unused default Vite assets 
+frontend--template/src/assets/react.svg
+frontend--template/src/assets/vite.svg
+frontend--template/src/assets/hero.png
