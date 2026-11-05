@@ -1,2 +1,18 @@
+
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment
 .env
-**/__pycache__/
+.env.*
+
+# React / Vite
+node_modules/
+dist/
+.cache/
+.vite/
+
+# Logs
+npm-debug.log*
