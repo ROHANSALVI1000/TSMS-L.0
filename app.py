@@ -3,6 +3,7 @@ from validation import USER,API
 from database import get_db,user_info
 from pwdlib import PasswordHash
 from sqlalchemy import select
+from auth import create_access_token
 
 p=PasswordHash.recommended()
 
@@ -42,6 +43,20 @@ def login(user:USER,db=Depends(get_db)):
             detail="password incorrect"
         )
     else:
-        return{"sucessfully login"}
+       token=create_access_token(z.id)
+       print(token)
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
     
