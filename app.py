@@ -4,11 +4,21 @@ from database import get_db,user_info
 from pwdlib import PasswordHash
 from sqlalchemy import select
 from auth import create_access_token
+from fastapi.middleware.cors import CORSMiddleware
 
 p=PasswordHash.recommended()
 
 
 app=FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.post("/register",response_model=API)
 def register(user:USER,db=Depends(get_db)):
@@ -42,9 +52,15 @@ def login(user:USER,db=Depends(get_db)):
             status_code=401,
             detail="password incorrect"
         )
-    else:
-       token=create_access_token(z.id)
-       print(token)
+    
+    token=create_access_token(z.id)
+
+    return{
+           "message":"login sucessful",
+           "access_token":token,
+           "token_type":"bearer"
+
+       }
 
 
 
