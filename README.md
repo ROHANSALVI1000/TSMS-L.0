@@ -15,4 +15,4 @@ A full-stack web application built with modern technologies.
 
 **Status:** In Development
 
-**Target Completion:** 11 November 2026
+**Target Completion:** 21 November 2026
