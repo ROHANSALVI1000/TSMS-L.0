@@ -1,74 +1,45 @@
-import {useState} from "react";
+import { useState } from "react";
 
-function app(){
+import {
+    Routes,
+    Route,
+    Navigate
+} from "react-router-dom";
 
-    const[name,setname]=useState("");
-    const[pas,setpas]=useState("");
-    const[message,setmessage]=useState("");
-    const[token,settoken]=useState("");
-
-
-
-    async function handleLogin(event) {
-        event.preventDefault();
+import Login from "./Login";
+import Dashboard from "./Dashboard";
 
 
-        try{
-            const response=await fetch(
-                "http://localhost:8000/login",
-                {
-                    method:"POST",
-                    headers:{
-                        "content-type":"application/json"
-                    },
-                    body:JSON.stringify({name,pas})
+function App() {
+
+    const [token, setToken] = useState("");
+
+    return (
+        <Routes>
+
+            <Route
+                path="/"
+                element={
+                    <Login
+                        setToken={setToken}
+                    />
                 }
-            );
-            const data= await response.json();
-         if (!response.ok){
-              throw new Error(data.detail||"failed")
-              }
+            />
 
-          settoken(data.access_token)
-          setmessage(data.message);
+            <Route
+                path="/dashboard"
+                element={
+                    token
+                    ? <Dashboard
+                        token={token}
+                        setToken={setToken}
+                      />
+                    : <Navigate to="/" replace />
+                }
+            />
 
-
-      
-        }
-
-        catch (error){
-            setmessage(error.message)
-        }
-        
-    }
-    return(
-        <div>
-            <h2>login form</h2>
-            <form onSubmit={handleLogin}>
-                <input
-                type="text"
-                placeholder="name"
-                value={name}
-                onChange={(e) => setname(e.target.value)}
-                /><required></required><br></br>
-
-                <input
-                type="password"
-                placeholder="password"
-                value={pas}
-                onChange={(e) => setpas(e.target.value)}
-                /><required></required><br></br>
-
-                <button type="submit">login</button>
-               
-            </form>
-
-            <p>{message}</p>
-            {token && (
-                <p>JWT successfully received!</p>
-            )}
-        </div>
-
+        </Routes>
     );
 }
-export default app;
+
+export default App;
