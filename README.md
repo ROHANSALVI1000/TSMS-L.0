@@ -1,3 +1,6 @@
+[![Open in GitHub Codespaces](https://github.com)](https://codespaces.new)
+
+
 TSMS L.0 – Student Management System
 
 TSMS L.0 is an upgraded version of my original Student Management System, rebuilt using modern full-stack technologies. The project aims to provide a school management platform with separate functionalities for students, teachers, and the principal.
